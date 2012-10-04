@@ -2,23 +2,23 @@
 The power of AVPlayer with the simplicity of MPMusicPlayerController.
 
 ## The problem
-You want to play music from the iPod library in your app. There are some possible ways to do this:
+So, you want to play music from the iPod library in your app. There are simply speaking two possible ways to do this:
 
 **MPMusicPlayerController**  
-Use MPMusicPlayerController. Easy to use, just give it a media query or media collection and you're done. It's easy to get notified about playback state and track changes, remote control events work and the now playing center is automatically updated.
+Use MPMusicPlayerController. Easy to use, just give it a media query or media collection and you're done. It's easy to get notified about playback state and track changes, remote control events work and the now playing center is automatically updated. Shuffling and repeat modes work like you would expect.
 
-However, notifications don't work while the app is in the background and your app icon won't show up in the multitasking bar. Setting up notification listeners is also a bit of a pain, there are no delegate methods.
+However, notifications don't work while the app is in the background and your app icon won't show up in the multitasking bar. If you don't need this, MPMusicPlayerController will serve you just fine.
 
 **AVPlayer**  
-A more powerful way is AVPlayer. You can execute code in the background and your app icon will show up in the multitasking bar.
+A more powerful way is to go with AVPlayer. You can execute code in the background and your app icon will show up in the multitasking bar.
 
 However, it doesn't work with media queries or media collections. It doesn't know anything about queues, repeat modes and shuffling. By itself, it doesn't send notifications about track changes. And last but not least, it's a lot more complicated to set it all up: handling the now playing center, listening to remote control events, handling audio route changes, etc.
 
 ## The solution
-GVMusicPlayerController marries the simplicity and API of MPMusicPlayerController (including using media queries, shuffling and repeat modes) with the playback power of AVPlayer, giving you background delegate methods and your app icon in the multitasking bar.
+GVMusicPlayerController marries the simplicity and API of MPMusicPlayerController with the playback power of AVPlayer, giving you background delegate methods and your app icon in the multitasking bar.
 
 ### Examples
-Handling a MPMediaPickerController with just two changed letters!
+Handling a MPMediaPickerController is almost the same!
 
 ```
 - (void)mediaPicker:(MPMediaPickerController *)mediaPicker didPickMediaItems:(MPMediaItemCollection *)mediaItemCollection {
@@ -61,7 +61,7 @@ Better delegate callbacks, that will be called while the app is in the backgroun
 }
 ```
 
-A complete music player app is included as an example. The example app needs iOS 5 to function due to the usage of storyboards, the library itself works on iOS 4.0 and above.
+A complete music player app is included as an example. The example app needs iOS 5 to function due to the usage of storyboards, the library itself works on iOS 4.0 and above. Please note that the image assets in the example app are not free to use, unlike the code.
 
 
 ## Installation
