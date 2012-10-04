@@ -23,11 +23,11 @@
 
 @property (strong, nonatomic, readonly) MPMediaItem *nowPlayingItem;
 @property (nonatomic) MPMusicPlaybackState playbackState;
-@property (nonatomic) MPMusicRepeatMode repeatMode;
-@property (nonatomic) MPMusicShuffleMode shuffleMode;
-@property (nonatomic) float volume;
-@property (nonatomic, readonly) NSUInteger indexOfNowPlayingItem;
-@property (nonatomic) BOOL updateNowPlayingCenter;
+@property (nonatomic) MPMusicRepeatMode repeatMode; // note: MPMusicRepeatModeDefault is not supported
+@property (nonatomic) MPMusicShuffleMode shuffleMode; // note: only MPMusicShuffleModeOff and MPMusicShuffleModeSongs are supported
+@property (nonatomic) float volume; // 0.0 to 1.0
+@property (nonatomic, readonly) NSUInteger indexOfNowPlayingItem; // NSNotFound if no queue
+@property (nonatomic) BOOL updateNowPlayingCenter; // default YES
 
 + (GVMusicPlayerController *)sharedInstance;
 
@@ -36,8 +36,13 @@
 - (void)remoteControlReceivedWithEvent:(UIEvent *)receivedEvent;
 - (void)setQueueWithItemCollection:(MPMediaItemCollection *)itemCollection;
 - (void)setQueueWithQuery:(MPMediaQuery *)query;
+
 - (void)skipToNextItem;
 - (void)skipToBeginning;
 - (void)skipToPreviousItem;
+
+// Check MPMediaPlayback for other playback related methods
+// and properties like play, plause, currentPlaybackTime
+// and more.
 
 @end

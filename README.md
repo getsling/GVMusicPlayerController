@@ -4,20 +4,20 @@ The power of AVPlayer with the simplicity of MPMusicPlayerController.
 ## The problem
 You want to play music from the iPod library in your app. There are some possible ways to do this:
 
-### MPMusicPlayerController
-Use MPMusicPlayerController. Easy to use, just give it a media query or media collection and you're done. It's easy to get notified about playback state and track changes, remote control events work and the now playing center is automatically updated. 
+**MPMusicPlayerController**  
+Use MPMusicPlayerController. Easy to use, just give it a media query or media collection and you're done. It's easy to get notified about playback state and track changes, remote control events work and the now playing center is automatically updated.
 
 However, notifications don't work while the app is in the background and your app icon won't show up in the multitasking bar. Setting up notification listeners is also a bit of a pain, there are no delegate methods.
 
-### AVPlayer
+**AVPlayer**  
 A more powerful way is AVPlayer. You can execute code in the background and your app icon will show up in the multitasking bar.
 
-However, it doesn't work with media queries or media collections. It doesn't know anything about queues, repeat modes and shuffling. By itself, it doesn't send notifications about track changes. And last but not least, it's a lot more complicated to set it all up: handling the now playing center, listening to remote control events, etc.
+However, it doesn't work with media queries or media collections. It doesn't know anything about queues, repeat modes and shuffling. By itself, it doesn't send notifications about track changes. And last but not least, it's a lot more complicated to set it all up: handling the now playing center, listening to remote control events, handling audio route changes, etc.
 
 ## The solution
-GVMusicPlayerController brings the simplicity and most of the API of MPMusicPlayerController, but playback happens with AVPlayer, giving all the power you need.
+GVMusicPlayerController marries the simplicity and API of MPMusicPlayerController (including using media queries, shuffling and repeat modes) with the playback power of AVPlayer, giving you background delegate methods and your app icon in the multitasking bar.
 
-### Example
+### Examples
 Handling a MPMediaPickerController with just two changed letters!
 
 ```
@@ -27,7 +27,7 @@ Handling a MPMediaPickerController with just two changed letters!
 }
 ```
 
-Better delegate callbacks:
+Better delegate callbacks, that will be called while the app is in the background:
 
 ```
 - (void)viewDidLoad {
@@ -61,6 +61,8 @@ Better delegate callbacks:
 }
 ```
 
+A complete music player app is included as an example. The example app needs Xcode 4.4 and iOS 5 to function, the library itself works on iOS 4.0 and above.
+
 
 ## Installation
 The best and easiest way is to use [CocoaPods](http://cocoapods.org).
@@ -75,11 +77,12 @@ Alternatively you can add this code as a Git submodule:
 
 1. `cd [your project root]`
 2. `git submodule add git://github.com/gangverk/GVMusicPlayerController.git`
-3. Drag the `GVMusicPlayerController ` subfolder to your project. Uncheck the "copy items into destination group's folder" box, do check your target.
+3. Drag the `GVMusicPlayerController` subfolder to your project. Uncheck the "copy items into destination group's folder" box, do check your target.
 
 ### Requirements
 
 * GVMusicPlayerController is built using ARC and modern Objective-C syntax. You will need Xcode 4.4 or higher to use it in your project.
+* iOS 4 or higher
 * You need to add the following frameworks to your project (or install GVMusicPlayerController with CocoaPods): `CoreMedia`, `AudioToolbox`, `AVFoundation` and `MediaPlayer`
 
 
@@ -89,3 +92,4 @@ Have a bug? Please [create an issue on GitHub](https://github.com/gangverk/GVMus
 
 ## License
 GVMusicPlayerController is available under the MIT license. See the LICENSE file for more info.
+The image assets provided in the example app are not part of this license and can not be copied, modified or used in any way.
