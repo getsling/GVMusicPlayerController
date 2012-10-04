@@ -32,7 +32,6 @@
 
 @interface GVMusicPlayerController () <AVAudioSessionDelegate>
 @property (strong, nonatomic) NSMutableSet *delegates;
-@property (strong, nonatomic) MPMediaQuery *query;
 @property (strong, nonatomic) AVPlayer *player;
 @property (strong, nonatomic) NSArray *originalQueue;
 @property (strong, nonatomic) NSArray *queue;
@@ -142,7 +141,7 @@ void audioRouteChangeListenerCallback (void *inUserData, AudioSessionPropertyID 
 }
 
 - (void)setQueueWithQuery:(MPMediaQuery *)query {
-    NSLog(@"Not implemented yet");
+    self.originalQueue = [query items];
 }
 
 - (void)skipToNextItem {

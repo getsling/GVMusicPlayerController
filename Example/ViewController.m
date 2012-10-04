@@ -105,6 +105,12 @@
     [self presentViewController:picker animated:YES completion:nil];
 }
 
+- (IBAction)playEverythingButtonPressed {
+    MPMediaQuery *query = [MPMediaQuery songsQuery];
+    [[GVMusicPlayerController sharedInstance] setQueueWithQuery:query];
+    [[GVMusicPlayerController sharedInstance] play];
+}
+
 - (IBAction)volumeChanged:(UISlider *)sender {
     self.panningVolume = YES;
     [GVMusicPlayerController sharedInstance].volume = sender.value;

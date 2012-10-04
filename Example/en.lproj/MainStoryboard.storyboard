@@ -25,7 +25,7 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="xxa-xt-8fo">
-                                        <rect key="frame" x="87" y="364" width="147" height="32"/>
+                                        <rect key="frame" x="87" y="384" width="147" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                         <inset key="titleEdgeInsets" minX="24" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -38,6 +38,22 @@
                                         </state>
                                         <connections>
                                             <action selector="chooseButtonPressed" destination="2" eventType="touchUpInside" id="5om-Ej-ovD"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="BoL-rl-a1i">
+                                        <rect key="frame" x="87" y="344" width="147" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                        <inset key="titleEdgeInsets" minX="24" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="Play all songs" backgroundImage="Play_Similar_Music.png">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted" backgroundImage="Play_Similar_Music_Pressed.png">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="playEverythingButtonPressed" destination="2" eventType="touchUpInside" id="15t-za-2GB"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -237,26 +253,6 @@
         <image name="Track_Shuffle_Off.png" width="20" height="18"/>
         <image name="Track_Shuffle_On.png" width="20" height="18"/>
     </resources>
-    <classes>
-        <class className="ViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="progressChanged:" candidateClass="UISlider"/>
-                <relationship kind="action" name="volumeChanged:" candidateClass="UISlider"/>
-                <relationship kind="outlet" name="artistLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="chooseView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="playPauseButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="progressSlider" candidateClass="UISlider"/>
-                <relationship kind="outlet" name="repeatButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="shuffleButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="songLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="trackCurrentPlaybackTimeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="trackLengthLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="volumeSlider" candidateClass="UISlider"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
