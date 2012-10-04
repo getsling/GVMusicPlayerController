@@ -1,21 +1,35 @@
 # GVMusicPlayerController
-The power of AVPlayer with the simplicity of MPMusicPlayerController.
+The power of AVPlayer with the simplicity of  MPMusicPlayerController.
 
 ## The problem
-You want to play music from the iPod library in your app. There are some possible ways to do this:
+So, you want to play music from the iPod library in your app. 
+There are some possible ways to do this:
 
 **MPMusicPlayerController**  
-Use MPMusicPlayerController. Easy to use, just give it a media query or media collection and you're done. It's easy to get notified about playback state and track changes, remote control events work and the now playing center is automatically updated.
+Use MPMusicPlayerController. Easy to use, just give it a media query or media
+collection and you're done. It's easy to get notified about playback state and
+track changes, remote control events work and the now playing center is
+automatically updated.
 
-However, notifications don't work while the app is in the background and your app icon won't show up in the multitasking bar. Setting up notification listeners is also a bit of a pain, there are no delegate methods.
+However, notifications don't work while the app is in the background and your
+app icon won't show up in the multitasking bar. Setting up notification
+listeners is also a bit of a pain, there are no delegate methods.
 
 **AVPlayer**  
-A more powerful way is AVPlayer. You can execute code in the background and your app icon will show up in the multitasking bar.
+A more powerful way is AVPlayer. You can execute code in the background and
+your app icon will show up  in the multitasking bar.
 
-However, it doesn't work with media queries or media collections. It doesn't know anything about queues, repeat modes and shuffling. By itself, it doesn't send notifications about track changes. And last but not least, it's a lot more complicated to set it all up: handling the now playing center, listening to remote control events, handling audio route changes, etc.
+However, it doesn't work with media queries or media collections. It doesn't
+know anything about queues, repeat modes and shuffling. By itself, it doesn't
+send notifications about track changes. And last but not least, it's a lot
+more complicated to set it all up: handling the now playing center, listening
+to remote control events, handling audio route changes, etc.
 
 ## The solution
-GVMusicPlayerController marries the simplicity and API of MPMusicPlayerController (including using media queries, shuffling and repeat modes) with the playback power of AVPlayer, giving you background delegate methods and your app icon in the multitasking bar.
+GVMusicPlayerController marries the simplicity and API of
+MPMusicPlayerController (including using  media queries, shuffling and repeat
+modes) with the playback power of AVPlayer, giving you background  delegate
+methods and your app icon in the multitasking bar.
 
 ### Examples
 Handling a MPMediaPickerController with just two changed letters!
@@ -27,7 +41,8 @@ Handling a MPMediaPickerController with just two changed letters!
 }
 ```
 
-Better delegate callbacks, that will be called while the app is in the background:
+Better delegate callbacks, that will be called while the app is in the
+background:
 
 ```
 - (void)viewDidLoad {
@@ -61,14 +76,17 @@ Better delegate callbacks, that will be called while the app is in the backgroun
 }
 ```
 
-A complete music player app is included as an example. The example app needs iOS 5 to function due to the usage of storyboards, the library itself works on iOS 4.0 and above.
+A complete music player app is included as an example. The example app needs
+iOS 5 to function due to the usage of storyboards, the library itself works on
+iOS 4.0 and above.
 
 
 ## Installation
 The best and easiest way is to use [CocoaPods](http://cocoapods.org).
 
 ### Alternatives
-Not using CocoaPods? You should, it's awesome! But okay, here are alterative methods.
+Not using CocoaPods? You should, it's awesome! But okay, here are alterative
+methods.
 
 1. Get the code: `git clone git://github.com/gangverk/GVMusicPlayerController.git`
 2. Drag the `GVMusicPlayerController ` subfolder to your project. Check both "copy items into destination group's folder" and your target.
@@ -91,5 +109,7 @@ Have a bug? Please [create an issue on GitHub](https://github.com/gangverk/GVMus
 
 
 ## License
-GVMusicPlayerController is available under the MIT license. See the LICENSE file for more info.  
-The image assets provided in the example app are not part of this license and can not be copied, modified or used in any way.
+GVMusicPlayerController is available under the MIT license. See the LICENSE
+file for more info.  
+The image assets provided in the example app are not part of this license and
+can not be copied, modified or used in any way.
