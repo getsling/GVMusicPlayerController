@@ -287,7 +287,7 @@ void audioRouteChangeListenerCallback (void *inUserData, AudioSessionPropertyID 
     _nowPlayingItem = nowPlayingItem;
 
     // Used to prevent duplicate notifications
-	self.isLoadingAsset = YES;
+    self.isLoadingAsset = YES;
 
     // Create a new player item
     NSURL *assetUrl = [nowPlayingItem valueForProperty:MPMediaItemPropertyAssetURL];
@@ -317,8 +317,8 @@ void audioRouteChangeListenerCallback (void *inUserData, AudioSessionPropertyID 
 }
 
 - (void)handleAVPlayerItemDidPlayToEndTimeNotification {
-	dispatch_async(dispatch_get_main_queue(), ^{
-		if (!self.isLoadingAsset) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (!self.isLoadingAsset) {
             if (self.repeatMode == MPMusicRepeatModeOne) {
                 // Play the same track again
                 self.indexOfNowPlayingItem = self.indexOfNowPlayingItem;
@@ -329,8 +329,8 @@ void audioRouteChangeListenerCallback (void *inUserData, AudioSessionPropertyID 
                 // Go to next track
                 [self skipToNextItem];
             }
-		}
-	});
+        }
+    });
 }
 
 - (void)doUpdateNowPlayingCenter {
