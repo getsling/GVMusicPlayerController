@@ -6,8 +6,7 @@ Pod::Spec.new do |s|
   s.license      = 'MIT'
   s.author       = { "Kevin Renskers" => "info@mixedcase.nl" }
   s.source       = { :git => "https://github.com/gangverk/GVMusicPlayerController.git", :tag => "0.1.0" }
-  s.ios.deployment_target = '4.0'
-  s.osx.deployment_target = '10.6'
+  s.platform     = :ios, '4.0'
   s.source_files = 'GVMusicPlayerController/*.{h,m}'
   s.requires_arc = true
   s.frameworks   = 'CoreMedia', 'AudioToolbox', 'AVFoundation', 'MediaPlayer'
