@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/gangverk/GVMusicPlayerController"
   s.license      = 'MIT'
   s.author       = { "Kevin Renskers" => "info@mixedcase.nl" }
-  s.source       = { :git => "https://github.com/gangverk/GVMusicPlayerController.git", :tag => "0.1.0" }
+  s.source       = { :git => "https://github.com/gangverk/GVMusicPlayerController.git", :tag => s.version.to_s }
   s.platform     = :ios, '4.0'
   s.source_files = 'GVMusicPlayerController/*.{h,m}'
   s.requires_arc = true
