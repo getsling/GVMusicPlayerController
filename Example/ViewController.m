@@ -99,16 +99,20 @@
 }
 
 - (IBAction)chooseButtonPressed {
+#if !(TARGET_IPHONE_SIMULATOR)
     MPMediaPickerController *picker = [[MPMediaPickerController alloc] initWithMediaTypes:MPMediaTypeMusic];
     picker.delegate = self;
     picker.allowsPickingMultipleItems = YES;
     [self presentViewController:picker animated:YES completion:nil];
+#endif
 }
 
 - (IBAction)playEverythingButtonPressed {
+#if !(TARGET_IPHONE_SIMULATOR)
     MPMediaQuery *query = [MPMediaQuery songsQuery];
     [[GVMusicPlayerController sharedInstance] setQueueWithQuery:query];
     [[GVMusicPlayerController sharedInstance] play];
+#endif
 }
 
 - (IBAction)volumeChanged:(UISlider *)sender {
