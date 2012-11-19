@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A582FE1165A7502005F1C1B /* GVMusicPlayerController.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 0A582FE0165A7501005F1C1B /* GVMusicPlayerController.podspec */; };
+		0A582FE8165A758F005F1C1B /* GVMusicPlayerController.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 0A582FE7165A758F005F1C1B /* GVMusicPlayerController.podspec */; };
 		0A7E5EAD161C9DB0006AB45D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A7E5EAC161C9DB0006AB45D /* UIKit.framework */; };
 		0A7E5EAF161C9DB0006AB45D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A7E5EAE161C9DB0006AB45D /* Foundation.framework */; };
 		0A7E5EB1161C9DB0006AB45D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A7E5EB0161C9DB0006AB45D /* CoreGraphics.framework */; };
@@ -60,7 +60,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0A582FE0165A7501005F1C1B /* GVMusicPlayerController.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GVMusicPlayerController.podspec; sourceTree = "<group>"; };
+		0A582FE7165A758F005F1C1B /* GVMusicPlayerController.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GVMusicPlayerController.podspec; sourceTree = "<group>"; };
 		0A7E5EA8161C9DB0006AB45D /* GVMusicPlayerController Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GVMusicPlayerController Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A7E5EAC161C9DB0006AB45D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0A7E5EAE161C9DB0006AB45D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -149,7 +149,7 @@
 				0AB06DB9161DCEB500149057 /* CHANGELOG */,
 				0AB06DBA161DCEB500149057 /* LICENSE */,
 				0AB06DBB161DCEB500149057 /* README.md */,
-				0A582FE0165A7501005F1C1B /* GVMusicPlayerController.podspec */,
+				0A582FE7165A758F005F1C1B /* GVMusicPlayerController.podspec */,
 			);
 			sourceTree = "<group>";
 		};
@@ -338,7 +338,7 @@
 				0AB06E29161DE4BF00149057 /* Play_Similar_Music_Pressed@2x.png in Resources */,
 				0AB06E2A161DE4BF00149057 /* Play_Similar_Music.png in Resources */,
 				0AB06E2B161DE4BF00149057 /* Play_Similar_Music@2x.png in Resources */,
-				0A582FE1165A7502005F1C1B /* GVMusicPlayerController.podspec in Resources */,
+				0A582FE8165A758F005F1C1B /* GVMusicPlayerController.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
