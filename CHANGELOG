@@ -1,2 +1,5 @@
+0.2.0 - November 19, 2012
+- Listen for volume changes, calling delegate methods
+
 0.1.0 - October 5, 2012
 - First public CocoaPods release
