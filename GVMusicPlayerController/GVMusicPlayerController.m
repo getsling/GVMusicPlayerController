@@ -107,9 +107,23 @@ void audioRouteChangeListenerCallback (void *inUserData, AudioSessionPropertyID 
 
         // Handle unplugging of headphones
         AudioSessionAddPropertyListener (kAudioSessionProperty_AudioRouteChange, audioRouteChangeListenerCallback, (__bridge void*)self);
+
+        // Listen for volume changes
+        [[MPMusicPlayerController iPodMusicPlayer] beginGeneratingPlaybackNotifications];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(handle_VolumeChanged:)
+                                                     name:MPMusicPlayerControllerVolumeDidChangeNotification
+                                                   object:[MPMusicPlayerController iPodMusicPlayer]];
     }
 
     return self;
+}
+
+- (void)dealloc {
+    [[MPMusicPlayerController iPodMusicPlayer] endGeneratingPlaybackNotifications];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                  name:MPMusicPlayerControllerVolumeDidChangeNotification
+                                object:[MPMusicPlayerController iPodMusicPlayer]];
 }
 
 - (void)addDelegate:(id<GVMusicPlayerControllerDelegate>)delegate {
@@ -374,6 +388,14 @@ void audioRouteChangeListenerCallback (void *inUserData, AudioSessionPropertyID 
     }
 
     _playbackState = playbackState;
+}
+
+- (void)handle_VolumeChanged:(NSNotification *)notification {
+    for (id <GVMusicPlayerControllerDelegate> delegate in self.delegates) {
+        if ([delegate respondsToSelector:@selector(musicPlayer:volumeChanged:)]) {
+            [delegate musicPlayer:self volumeChanged:[MPMusicPlayerController iPodMusicPlayer].volume];
+        }
+    }
 }
 
 #pragma mark - AVAudioSessionDelegate
