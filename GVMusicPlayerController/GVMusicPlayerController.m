@@ -168,6 +168,7 @@ void audioRouteChangeListenerCallback (void *inUserData, AudioSessionPropertyID 
             self.indexOfNowPlayingItem = 0;
         } else {
             NSLog(@"GVMusicPlayerController: end of queue reached");
+            [self stop];
         }
     }
 }
@@ -301,6 +302,8 @@ void audioRouteChangeListenerCallback (void *inUserData, AudioSessionPropertyID 
 }
 
 - (void)setNowPlayingItem:(MPMediaItem *)nowPlayingItem {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+
     MPMediaItem *previousTrack = _nowPlayingItem;
     _nowPlayingItem = nowPlayingItem;
 
@@ -311,15 +314,15 @@ void audioRouteChangeListenerCallback (void *inUserData, AudioSessionPropertyID 
     NSURL *assetUrl = [nowPlayingItem valueForProperty:MPMediaItemPropertyAssetURL];
     AVPlayerItem *playerItem = [AVPlayerItem playerItemWithURL:assetUrl];
 
-    // Subscribe to the AVPlayerItem's DidPlayToEndTime notification.
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleAVPlayerItemDidPlayToEndTimeNotification) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
-
     // Either create a player or replace it
     if (self.player) {
         [self.player replaceCurrentItemWithPlayerItem:playerItem];
     } else {
         self.player = [AVPlayer playerWithPlayerItem:playerItem];
     }
+
+    // Subscribe to the AVPlayerItem's DidPlayToEndTime notification.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleAVPlayerItemDidPlayToEndTimeNotification) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
 
     // Inform delegates
     for (id <GVMusicPlayerControllerDelegate> delegate in self.delegates) {
@@ -335,8 +338,8 @@ void audioRouteChangeListenerCallback (void *inUserData, AudioSessionPropertyID 
 }
 
 - (void)handleAVPlayerItemDidPlayToEndTimeNotification {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if (!self.isLoadingAsset) {
+    if (!self.isLoadingAsset) {
+        dispatch_async(dispatch_get_main_queue(), ^{
             if (self.repeatMode == MPMusicRepeatModeOne) {
                 // Play the same track again
                 self.indexOfNowPlayingItem = self.indexOfNowPlayingItem;
@@ -346,9 +349,12 @@ void audioRouteChangeListenerCallback (void *inUserData, AudioSessionPropertyID 
             } else {
                 // Go to next track
                 [self skipToNextItem];
+                if (self.playbackState == MPMusicPlaybackStatePlaying) {
+                    [self.player play];
+                }
             }
-        }
-    });
+        });
+    }
 }
 
 - (void)doUpdateNowPlayingCenter {
