@@ -1,3 +1,6 @@
+0.3.0 - December 12, 2012
+- Fix problem continuing to the correct track after a track has played entirely
+
 0.2.0 - November 19, 2012
 - Listen for volume changes, calling delegate methods
 
