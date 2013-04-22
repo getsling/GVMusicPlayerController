@@ -31,7 +31,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[GVMusicPlayerController sharedInstance] addDelegate:self];
 
     [self.view bringSubviewToFront:self.chooseView];
 
@@ -39,14 +38,18 @@
     [self.timer fire];
 }
 
-- (void)viewDidUnload {
-    [[GVMusicPlayerController sharedInstance] removeDelegate:self];
-    [self setChooseView:nil];
-    [super viewDidUnload];
+- (void)viewWillAppear:(BOOL)animated {
+    // NOTE: add and remove the GVMusicPlayerController delegate in
+    // the viewWillAppear / viewDidDisappear methods, not in the
+    // viewDidLoad / viewDidUnload methods - it will result in dangling
+    // objects in memory.
+    [super viewWillAppear:animated];
+    [[GVMusicPlayerController sharedInstance] addDelegate:self];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+- (void)viewDidDisappear:(BOOL)animated {
+    [[GVMusicPlayerController sharedInstance] removeDelegate:self];
+    [super viewDidDisappear:animated];
 }
 
 - (void)timedJob {

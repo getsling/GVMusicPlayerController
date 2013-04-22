@@ -35,14 +35,14 @@ Handling a MPMediaPickerController is almost the same!
 Better delegate callbacks, that will be called while the app is in the background:
 
 ```
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [[GVMusicPlayerController sharedInstance] addDelegate:self];
 }
 
-- (void)viewDidUnload {
+- (void)viewDidDisappear:(BOOL)animated {
     [[GVMusicPlayerController sharedInstance] removeDelegate:self];
-    [super viewDidUnload];
+    [super viewDidDisappear:animated];
 }
 
 - (void)musicPlayer:(GVMusicPlayerController *)musicPlayer playbackStateChanged:(MPMusicPlaybackState)playbackState previousPlaybackState:(MPMusicPlaybackState)previousPlaybackState {
