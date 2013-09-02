@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "GVMusicPlayerController"
-  s.version      = "0.3.0"
+  s.version      = "0.3.1"
   s.summary      = "The power of AVPlayer with the simplicity of MPMusicPlayerController."
   s.homepage     = "https://github.com/gangverk/GVMusicPlayerController"
   s.license      = 'MIT'
