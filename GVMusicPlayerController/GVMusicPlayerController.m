@@ -85,7 +85,7 @@ void audioRouteChangeListenerCallback (void *inUserData, AudioSessionPropertyID 
     self = [super init];
     if (self) {
         self.indexOfNowPlayingItem = NSNotFound;
-        self.delegates = [NSMutableArray array];
+        self.delegates = [NSMutableSet set];
 
         // Set defaults
         self.updateNowPlayingCenter = YES;
