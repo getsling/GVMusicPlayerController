@@ -1,4 +1,8 @@
 # GVMusicPlayerController
+
+[![Badge w/ Version](https://cocoapod-badges.herokuapp.com/v/GVMusicPlayerController/badge.png)](http://cocoadocs.org/docsets/GVMusicPlayerController)
+[![Badge w/ Platform](https://cocoapod-badges.herokuapp.com/p/GVMusicPlayerController/badge.svg)](http://cocoadocs.org/docsets/GVMusicPlayerController)
+
 The power of AVPlayer with the simplicity of MPMusicPlayerController.
 
 ## The problem
