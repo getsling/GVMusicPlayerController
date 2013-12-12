@@ -31,7 +31,7 @@
 
 
 @interface GVMusicPlayerController () <AVAudioSessionDelegate>
-@property (strong, nonatomic) NSSet *delegates;
+@property (copy, nonatomic) NSArray *delegates;
 @property (strong, nonatomic) AVPlayer *player;
 @property (strong, nonatomic) NSArray *originalQueue;
 @property (strong, nonatomic) NSArray *queue;
@@ -85,7 +85,7 @@ void audioRouteChangeListenerCallback (void *inUserData, AudioSessionPropertyID 
     self = [super init];
     if (self) {
         self.indexOfNowPlayingItem = NSNotFound;
-        self.delegates = [NSSet set];
+        self.delegates = [NSArray array];
 
         // Set defaults
         self.updateNowPlayingCenter = YES;
@@ -127,7 +127,7 @@ void audioRouteChangeListenerCallback (void *inUserData, AudioSessionPropertyID 
 }
 
 - (void)addDelegate:(id<GVMusicPlayerControllerDelegate>)delegate {
-    NSMutableSet *delegates = [self.delegates mutableCopy];
+    NSMutableArray *delegates = [self.delegates mutableCopy];
     [delegates addObject:delegate];
     self.delegates = delegates;
 
@@ -147,7 +147,7 @@ void audioRouteChangeListenerCallback (void *inUserData, AudioSessionPropertyID 
 }
 
 - (void)removeDelegate:(id<GVMusicPlayerControllerDelegate>)delegate {
-    NSMutableSet *delegates = [self.delegates mutableCopy];
+    NSMutableArray *delegates = [self.delegates mutableCopy];
     [delegates removeObject:delegate];
     self.delegates = delegates;
 }
