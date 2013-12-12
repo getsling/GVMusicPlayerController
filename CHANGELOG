@@ -1,3 +1,6 @@
+0.3.3 - December 12, 2013
+- Use an array for the delegates since we need to preserve order
+
 0.3.2 - November 26, 2013
 - Use a non-mutable set for the delegates, preventing crashes due to looping-while-modifying
 
