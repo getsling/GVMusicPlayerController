@@ -232,6 +232,10 @@
     NSLog(@"Proof that this code is being called, even in the background!");
 }
 
+- (void)musicPlayer:(GVMusicPlayerController *)musicPlayer endOfQueueReached:(MPMediaItem *)lastTrack {
+    NSLog(@"End of queue, but last track was %@", [lastTrack valueForProperty:MPMediaItemPropertyTitle]);
+}
+
 - (void)musicPlayer:(GVMusicPlayerController *)musicPlayer volumeChanged:(float)volume {
     if (!self.panningVolume) {
         self.volumeSlider.value = volume;

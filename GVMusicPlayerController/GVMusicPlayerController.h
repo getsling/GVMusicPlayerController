@@ -14,6 +14,7 @@
 @protocol GVMusicPlayerControllerDelegate <NSObject>
 @optional
 - (void)musicPlayer:(GVMusicPlayerController *)musicPlayer trackDidChange:(MPMediaItem *)nowPlayingItem previousTrack:(MPMediaItem *)previousTrack;
+- (void)musicPlayer:(GVMusicPlayerController *)musicPlayer endOfQueueReached:(MPMediaItem *)lastTrack;
 - (void)musicPlayer:(GVMusicPlayerController *)musicPlayer playbackStateChanged:(MPMusicPlaybackState)playbackState previousPlaybackState:(MPMusicPlaybackState)previousPlaybackState;
 - (void)musicPlayer:(GVMusicPlayerController *)musicPlayer volumeChanged:(float)volume;
 @end

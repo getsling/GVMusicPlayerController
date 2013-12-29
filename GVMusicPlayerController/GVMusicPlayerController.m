@@ -144,6 +144,10 @@ void audioRouteChangeListenerCallback (void *inUserData, AudioSessionPropertyID 
     if ([delegate respondsToSelector:@selector(musicPlayer:volumeChanged:)]) {
         [delegate musicPlayer:self volumeChanged:self.volume];
     }
+    
+    if ([delegate respondsToSelector:@selector(musicPlayer:endOfQueueReached:)]) {
+        [delegate musicPlayer:self endOfQueueReached:self.nowPlayingItem];
+    }
 }
 
 - (void)removeDelegate:(id<GVMusicPlayerControllerDelegate>)delegate {
@@ -171,6 +175,15 @@ void audioRouteChangeListenerCallback (void *inUserData, AudioSessionPropertyID 
             // Wrap around back to the first track
             self.indexOfNowPlayingItem = 0;
         } else {
+            if (self.playbackState == MPMusicPlaybackStatePlaying) {
+                if (_nowPlayingItem != nil) {
+                    for (id <GVMusicPlayerControllerDelegate> delegate in self.delegates) {
+                        if ([delegate respondsToSelector:@selector(musicPlayer:endOfQueueReached:)]) {
+                            [delegate musicPlayer:self endOfQueueReached:_nowPlayingItem];
+                        }
+                    }
+                }
+            }
             NSLog(@"GVMusicPlayerController: end of queue reached");
             [self stop];
         }
