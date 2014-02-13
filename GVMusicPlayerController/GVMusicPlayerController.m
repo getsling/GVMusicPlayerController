@@ -34,7 +34,7 @@
 @property (copy, nonatomic) NSArray *delegates;
 @property (strong, nonatomic) AVPlayer *player;
 @property (strong, nonatomic) NSArray *originalQueue;
-@property (strong, nonatomic) NSArray *queue;
+@property (strong, nonatomic, readwrite) NSArray *queue;
 @property (strong, nonatomic, readwrite) MPMediaItem *nowPlayingItem;
 @property (nonatomic, readwrite) NSUInteger indexOfNowPlayingItem;
 @property (nonatomic) BOOL interrupted;
@@ -91,6 +91,7 @@ void audioRouteChangeListenerCallback (void *inUserData, AudioSessionPropertyID 
         self.updateNowPlayingCenter = YES;
         self.repeatMode = MPMusicRepeatModeNone;
         self.shuffleMode = MPMusicShuffleModeOff;
+        self.shouldReturnToBeginningWhenSkippingToPreviousItem = YES;
 
         // Make sure the system follows our playback status
         AVAudioSession *audioSession = [AVAudioSession sharedInstance];
@@ -197,7 +198,8 @@ void audioRouteChangeListenerCallback (void *inUserData, AudioSessionPropertyID 
 - (void)skipToPreviousItem {
     if (self.indexOfNowPlayingItem > 0) {
         self.indexOfNowPlayingItem--;
-    } else {
+    }
+    else if (self.shouldReturnToBeginningWhenSkippingToPreviousItem) {
         [self skipToBeginning];
     }
 }
@@ -352,6 +354,15 @@ void audioRouteChangeListenerCallback (void *inUserData, AudioSessionPropertyID 
     [self doUpdateNowPlayingCenter];
 
     self.isLoadingAsset = NO;
+}
+
+- (void) playItemAtIndex:(NSUInteger)index {
+    [self setIndexOfNowPlayingItem:index];
+}
+
+- (void) playItem:(MPMediaItem*)item {
+    NSUInteger indexOfItem = [self.queue indexOfObject:item];
+    [self playItemAtIndex:indexOfItem];
 }
 
 - (void)handleAVPlayerItemDidPlayToEndTimeNotification {
