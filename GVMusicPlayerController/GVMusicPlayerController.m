@@ -198,8 +198,7 @@ void audioRouteChangeListenerCallback (void *inUserData, AudioSessionPropertyID 
 - (void)skipToPreviousItem {
     if (self.indexOfNowPlayingItem > 0) {
         self.indexOfNowPlayingItem--;
-    }
-    else if (self.shouldReturnToBeginningWhenSkippingToPreviousItem) {
+    } else if (self.shouldReturnToBeginningWhenSkippingToPreviousItem) {
         [self skipToBeginning];
     }
 }
@@ -356,11 +355,11 @@ void audioRouteChangeListenerCallback (void *inUserData, AudioSessionPropertyID 
     self.isLoadingAsset = NO;
 }
 
-- (void) playItemAtIndex:(NSUInteger)index {
+- (void)playItemAtIndex:(NSUInteger)index {
     [self setIndexOfNowPlayingItem:index];
 }
 
-- (void) playItem:(MPMediaItem*)item {
+- (void)playItem:(MPMediaItem *)item {
     NSUInteger indexOfItem = [self.queue indexOfObject:item];
     [self playItemAtIndex:indexOfItem];
 }

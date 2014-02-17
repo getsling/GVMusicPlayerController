@@ -30,7 +30,7 @@
 @property (nonatomic, readonly) NSUInteger indexOfNowPlayingItem; // NSNotFound if no queue
 @property (nonatomic) BOOL updateNowPlayingCenter; // default YES
 @property (nonatomic, readonly) NSArray *queue;
-@property (nonatomic) BOOL shouldReturnToBeginningWhenSkippingToPreviousItem;
+@property (nonatomic) BOOL shouldReturnToBeginningWhenSkippingToPreviousItem; // default YES
 
 + (GVMusicPlayerController *)sharedInstance;
 
@@ -44,8 +44,8 @@
 - (void)skipToBeginning;
 - (void)skipToPreviousItem;
 
-- (void) playItemAtIndex:(NSUInteger)index;
-- (void) playItem:(MPMediaItem*)item;
+- (void)playItemAtIndex:(NSUInteger)index;
+- (void)playItem:(MPMediaItem *)item;
 
 // Check MPMediaPlayback for other playback related methods
 // and properties like play, plause, currentPlaybackTime

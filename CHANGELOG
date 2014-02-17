@@ -1,3 +1,6 @@
+0.4.0 - February 17, 2014
+- Expose methods to set the currently playing item
+
 0.3.3 - December 12, 2013
 - Use an array for the delegates since we need to preserve order
 
