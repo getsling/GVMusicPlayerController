@@ -73,26 +73,8 @@ Better delegate callbacks, that will be called while the app is in the backgroun
 
 A complete music player app is included as an example. The example app needs iOS 5 to function due to the usage of storyboards, the library itself works on iOS 4.0 and above. Please note that the image assets in the example app are not free to use, unlike the code.
 
-
-## Installation
-The best and easiest way is to use [CocoaPods](http://cocoapods.org).
-
-### Alternatives
-Not using CocoaPods? You should, it's awesome! But okay, here are alterative methods.
-
-1. Get the code: `git clone git://github.com/gangverk/GVMusicPlayerController.git`
-2. Drag the `GVMusicPlayerController ` subfolder to your project. Check both "copy items into destination group's folder" and your target.
-
-Alternatively you can add this code as a Git submodule:
-
-1. `cd [your project root]`
-2. `git submodule add git://github.com/gangverk/GVMusicPlayerController.git`
-3. Drag the `GVMusicPlayerController` subfolder to your project. Uncheck the "copy items into destination group's folder" box, do check your target.
-
 ### Requirements
-
-* GVMusicPlayerController is built using ARC and modern Objective-C syntax. You will need Xcode 4.4 or higher to use it in your project.
-* iOS 4 or higher
+* iOS 5 or higher
 * You need to add the following frameworks to your project (or use CocoaPods for automatic dependency handling): `CoreMedia`, `AudioToolbox`, `AVFoundation` and `MediaPlayer`
 
 

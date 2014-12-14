@@ -199,7 +199,7 @@
     [self.repeatButton setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
 }
 
-#pragma mark - AVMusicPlayerControllerDelegate
+#pragma mark - GVMusicPlayerControllerDelegate
 
 - (void)musicPlayer:(GVMusicPlayerController *)musicPlayer playbackStateChanged:(MPMusicPlaybackState)playbackState previousPlaybackState:(MPMusicPlaybackState)previousPlaybackState {
     self.playPauseButton.selected = (playbackState == MPMusicPlaybackStatePlaying);

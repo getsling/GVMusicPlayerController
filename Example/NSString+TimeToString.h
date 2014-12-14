@@ -3,7 +3,7 @@
 //  lastfmlocalplayback
 //
 //  Created by Kevin Renskers on 19-09-12.
-//  Copyright (c) 2012 Last.fm. All rights reserved.
+//  Copyright (c) 2012 Gangverk. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

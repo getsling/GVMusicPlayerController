@@ -11,8 +11,9 @@
 
 
 @interface NSArray (GVShuffledArray)
-- (NSArray *)shuffled;
+@property (NS_NONATOMIC_IOSONLY, readonly, copy) NSArray *shuffled;
 @end
+
 
 @implementation NSArray (GVShuffledArray)
 
@@ -41,11 +42,8 @@
 @property (nonatomic) BOOL isLoadingAsset;
 @end
 
-@implementation GVMusicPlayerController
 
-@synthesize isPreparedToPlay = _isPreparedToPlay;
-@synthesize currentPlaybackTime = _currentPlaybackTime;
-@synthesize currentPlaybackRate = _currentPlaybackRate;
+@implementation GVMusicPlayerController
 
 + (GVMusicPlayerController *)sharedInstance {
     static dispatch_once_t onceQueue;
@@ -81,11 +79,11 @@ void audioRouteChangeListenerCallback (void *inUserData, AudioSessionPropertyID 
     }
 }
 
-- (id)init {
+- (instancetype)init {
     self = [super init];
     if (self) {
         self.indexOfNowPlayingItem = NSNotFound;
-        self.delegates = [NSArray array];
+        self.delegates = @[];
 
         // Set defaults
         self.updateNowPlayingCenter = YES;
@@ -144,10 +142,6 @@ void audioRouteChangeListenerCallback (void *inUserData, AudioSessionPropertyID 
 
     if ([delegate respondsToSelector:@selector(musicPlayer:volumeChanged:)]) {
         [delegate musicPlayer:self volumeChanged:self.volume];
-    }
-    
-    if ([delegate respondsToSelector:@selector(musicPlayer:endOfQueueReached:)]) {
-        [delegate musicPlayer:self endOfQueueReached:self.nowPlayingItem];
     }
 }
 
@@ -316,7 +310,7 @@ void audioRouteChangeListenerCallback (void *inUserData, AudioSessionPropertyID 
     }
 
     _indexOfNowPlayingItem = indexOfNowPlayingItem;
-    self.nowPlayingItem = [self.queue objectAtIndex:indexOfNowPlayingItem];
+    self.nowPlayingItem = (self.queue)[indexOfNowPlayingItem];
 }
 
 - (void)setNowPlayingItem:(MPMediaItem *)nowPlayingItem {
@@ -389,14 +383,7 @@ void audioRouteChangeListenerCallback (void *inUserData, AudioSessionPropertyID 
         return;
     }
 
-    // Only available on iOS 5
-    Class playingInfoCenter = NSClassFromString(@"MPNowPlayingInfoCenter");
-    if (!playingInfoCenter) {
-        return;
-    }
-
-    MPNowPlayingInfoCenter *center = [playingInfoCenter defaultCenter];
-
+    MPNowPlayingInfoCenter *center = [MPNowPlayingInfoCenter defaultCenter];
     NSMutableDictionary *songInfo = [NSMutableDictionary dictionaryWithDictionary:@{
         MPMediaItemPropertyArtist: [self.nowPlayingItem valueForProperty:MPMediaItemPropertyArtist] ?: @"",
         MPMediaItemPropertyTitle: [self.nowPlayingItem valueForProperty:MPMediaItemPropertyTitle] ?: @"",
@@ -407,7 +394,7 @@ void audioRouteChangeListenerCallback (void *inUserData, AudioSessionPropertyID 
     // Add the artwork if it exists
     MPMediaItemArtwork *artwork = [self.nowPlayingItem valueForProperty:MPMediaItemPropertyArtwork];
     if (artwork) {
-        [songInfo setObject:artwork forKey:MPMediaItemPropertyArtwork];
+        songInfo[MPMediaItemPropertyArtwork] = artwork;
     }
 
     center.nowPlayingInfo = songInfo;
@@ -418,13 +405,13 @@ void audioRouteChangeListenerCallback (void *inUserData, AudioSessionPropertyID 
         return;
     }
 
+    _playbackState = playbackState;
+
     for (id <GVMusicPlayerControllerDelegate> delegate in self.delegates) {
         if ([delegate respondsToSelector:@selector(musicPlayer:playbackStateChanged:previousPlaybackState:)]) {
             [delegate musicPlayer:self playbackStateChanged:playbackState previousPlaybackState:_playbackState];
         }
     }
-
-    _playbackState = playbackState;
 }
 
 - (void)handle_VolumeChanged:(NSNotification *)notification {
