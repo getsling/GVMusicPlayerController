@@ -25,7 +25,7 @@ This class doesn't work with iPod library items, so unless you want to copy audi
 GVMusicPlayerController marries the simplicity and API of MPMusicPlayerController with the playback power of AVPlayer, giving you background delegate methods and your app icon in the multitasking bar.
 
 ### The catch
-What's the catch, I hear you ask? Sadly, AVPlayer can't play music that's in iCloud or anything with DRM. This may be a major deal breaker for you. It certainly was for us, and as such we (Gangverk) don't use GVMusicPlayerController in any of our own apps. This also means that bugfixes and new features should come from contributors as this project has a very low pririty for us.
+What's the catch, I hear you ask? **Sadly, AVPlayer can't play music that's in iCloud or anything with DRM.** This may be a major deal breaker for you. It certainly was for us, and as such we (Gangverk) don't use GVMusicPlayerController in any of our own apps. This also means that bugfixes and new features should come from contributors as this project has a very low pririty for us.
 
 ### Examples
 Handling a MPMediaPickerController is almost the same!
