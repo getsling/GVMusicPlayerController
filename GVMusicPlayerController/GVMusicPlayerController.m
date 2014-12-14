@@ -405,11 +405,12 @@ void audioRouteChangeListenerCallback (void *inUserData, AudioSessionPropertyID 
         return;
     }
 
+    MPMusicPlaybackState oldState = _playbackState;
     _playbackState = playbackState;
 
     for (id <GVMusicPlayerControllerDelegate> delegate in self.delegates) {
         if ([delegate respondsToSelector:@selector(musicPlayer:playbackStateChanged:previousPlaybackState:)]) {
-            [delegate musicPlayer:self playbackStateChanged:playbackState previousPlaybackState:_playbackState];
+            [delegate musicPlayer:self playbackStateChanged:_playbackState previousPlaybackState:oldState];
         }
     }
 }
