@@ -81,7 +81,7 @@ A complete music player app is included as an example. The example app needs iOS
 
 
 ## Issues and questions
-Have a bug? Please [create an issue on GitHub](https://github.com/gangverk/GVMusicPlayerController/issues)!
+This software is provided as-is, we can't give support. We don't use this in any of our own apps because of [the catch](https://github.com/gangverk/GVMusicPlayerController#the-catch). If you find a bug please submit a pull request with the fix.
 
 
 ## License
