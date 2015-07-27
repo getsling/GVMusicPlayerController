@@ -5,6 +5,8 @@
 
 The power of AVPlayer with the simplicity of MPMusicPlayerController.
 
+**This software is provided as-is, we can't give support. We don't use this in any of our own apps because of [the catch](https://github.com/gangverk/GVMusicPlayerController#the-catch).**
+
 ## The problem
 So, you want to play music from the iPod library in your app. There are simply speaking two possible ways to do this:
 
