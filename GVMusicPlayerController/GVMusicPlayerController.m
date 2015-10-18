@@ -235,11 +235,11 @@ void audioRouteChangeListenerCallback (void *inUserData, AudioSessionPropertyID 
 }
 
 - (NSTimeInterval)currentPlaybackTime {
-#if !(TARGET_IPHONE_SIMULATOR)
-    return self.player.currentTime.value / self.player.currentTime.timescale;
-#else
+//#if !(TARGET_IPHONE_SIMULATOR)
+  //  return self.player.currentTime.value / self.player.currentTime.timescale;
+//#else
     return 0;
-#endif
+//#endif
 }
 
 - (void)setCurrentPlaybackTime:(NSTimeInterval)currentPlaybackTime {
