@@ -1,7 +1,7 @@
 # GVMusicPlayerController
 
 [![Badge w/ Version](https://cocoapod-badges.herokuapp.com/v/GVMusicPlayerController/badge.png)](http://cocoadocs.org/docsets/GVMusicPlayerController)
-[![Badge w/ Platform](https://cocoapod-badges.herokuapp.com/p/GVMusicPlayerController/badge.svg)](http://cocoadocs.org/docsets/GVMusicPlayerController)
+[![Badge w/ Platform](https://cocoapod-badges.herokuapp.com/p/GVMusicPlayerController/badge.svg)](http://cocoadocs.org/docsets/GVMusicPlayerController) [![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
 
 The power of AVPlayer with the simplicity of MPMusicPlayerController.
 
