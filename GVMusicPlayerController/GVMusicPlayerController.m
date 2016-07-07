@@ -235,7 +235,7 @@ void audioRouteChangeListenerCallback (void *inUserData, AudioSessionPropertyID 
 }
 
 - (NSTimeInterval)currentPlaybackTime {
-    if (self.player) {
+    if (self.player && (self.player.currentTime.timescale != 0)) {
         return self.player.currentTime.value / self.player.currentTime.timescale;
     } else {
         return 0;
