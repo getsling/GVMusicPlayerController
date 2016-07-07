@@ -76,6 +76,7 @@ A complete music player app is included as an example. The example app needs iOS
 ### Requirements
 * iOS 5 or higher
 * You need to add the following frameworks to your project (or use CocoaPods for automatic dependency handling): `CoreMedia`, `AudioToolbox`, `AVFoundation` and `MediaPlayer`
+* The app can work in the iOS Simulator too, if you follow the steps listed in the answers to [this question](http://stackoverflow.com/questions/3159716/can-i-access-ipod-library-on-simulator) on Stack Overflow
 
 
 ## Issues and questions
