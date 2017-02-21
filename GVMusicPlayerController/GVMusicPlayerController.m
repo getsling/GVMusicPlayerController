@@ -245,6 +245,7 @@ void audioRouteChangeListenerCallback (void *inUserData, AudioSessionPropertyID 
 - (void)setCurrentPlaybackTime:(NSTimeInterval)currentPlaybackTime {
     CMTime t = CMTimeMake(currentPlaybackTime, 1);
     [self.player seekToTime:t];
+    [self performSelector:@selector(doUpdateNowPlayingCenter) withObject:nil afterDelay:0.5];
 }
 
 - (float)currentPlaybackRate {
@@ -384,12 +385,30 @@ void audioRouteChangeListenerCallback (void *inUserData, AudioSessionPropertyID 
     }
 
     MPNowPlayingInfoCenter *center = [MPNowPlayingInfoCenter defaultCenter];
+    NSTimeInterval elapsedInSeconds = self.currentPlaybackTime;
+    NSTimeInterval totalInSeconds = [[self.nowPlayingItem valueForProperty:MPMediaItemPropertyPlaybackDuration] doubleValue];
+    MPMusicPlaybackState state = self.playbackState;
+    float playbackProgress = (totalInSeconds > 0) ? elapsedInSeconds/totalInSeconds : 0;
+    float rate = (state == MPMusicPlaybackStatePlaying) ? self.currentPlaybackRate : 0;
+
     NSMutableDictionary *songInfo = [NSMutableDictionary dictionaryWithDictionary:@{
         MPMediaItemPropertyArtist: [self.nowPlayingItem valueForProperty:MPMediaItemPropertyArtist] ?: @"",
         MPMediaItemPropertyTitle: [self.nowPlayingItem valueForProperty:MPMediaItemPropertyTitle] ?: @"",
         MPMediaItemPropertyAlbumTitle: [self.nowPlayingItem valueForProperty:MPMediaItemPropertyAlbumTitle] ?: @"",
-        MPMediaItemPropertyPlaybackDuration: [self.nowPlayingItem valueForProperty:MPMediaItemPropertyPlaybackDuration] ?: @0
+        MPMediaItemPropertyPlaybackDuration: @(totalInSeconds),
+        MPNowPlayingInfoPropertyElapsedPlaybackTime: @(elapsedInSeconds),
+        MPNowPlayingInfoPropertyPlaybackRate: @(rate),
     }];
+
+    if (&MPNowPlayingInfoPropertyPlaybackProgress != NULL)
+        songInfo[MPNowPlayingInfoPropertyPlaybackProgress] = @(playbackProgress);
+    if (&MPNowPlayingInfoPropertyMediaType != NULL)
+        songInfo[MPNowPlayingInfoPropertyMediaType] = @(MPNowPlayingInfoMediaTypeAudio);
+
+    if (_shuffleMode == MPMusicShuffleModeOff) {
+        songInfo[MPNowPlayingInfoPropertyPlaybackQueueIndex] = @(self.indexOfNowPlayingItem);
+        songInfo[MPNowPlayingInfoPropertyPlaybackQueueCount] = @(_queue.count);
+    }
 
     // Add the artwork if it exists
     MPMediaItemArtwork *artwork = [self.nowPlayingItem valueForProperty:MPMediaItemPropertyArtwork];
@@ -407,6 +426,8 @@ void audioRouteChangeListenerCallback (void *inUserData, AudioSessionPropertyID 
 
     MPMusicPlaybackState oldState = _playbackState;
     _playbackState = playbackState;
+
+    [self doUpdateNowPlayingCenter];
 
     for (id <GVMusicPlayerControllerDelegate> delegate in self.delegates) {
         if ([delegate respondsToSelector:@selector(musicPlayer:playbackStateChanged:previousPlaybackState:)]) {
