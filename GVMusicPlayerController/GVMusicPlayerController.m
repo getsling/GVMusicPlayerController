@@ -388,6 +388,7 @@ void audioRouteChangeListenerCallback (void *inUserData, AudioSessionPropertyID 
     NSTimeInterval elapsedInSeconds = self.currentPlaybackTime;
     NSTimeInterval totalInSeconds = [[self.nowPlayingItem valueForProperty:MPMediaItemPropertyPlaybackDuration] doubleValue];
     MPMusicPlaybackState state = self.playbackState;
+    float playbackProgress = (totalInSeconds > 0) ? elapsedInSeconds/totalInSeconds : 0;
     float rate = (state == MPMusicPlaybackStatePlaying) ? self.currentPlaybackRate : 0;
 
     NSMutableDictionary *songInfo = [NSMutableDictionary dictionaryWithDictionary:@{
@@ -396,10 +397,13 @@ void audioRouteChangeListenerCallback (void *inUserData, AudioSessionPropertyID 
         MPMediaItemPropertyAlbumTitle: [self.nowPlayingItem valueForProperty:MPMediaItemPropertyAlbumTitle] ?: @"",
         MPMediaItemPropertyPlaybackDuration: @(totalInSeconds),
         MPNowPlayingInfoPropertyElapsedPlaybackTime: @(elapsedInSeconds),
-        MPNowPlayingInfoPropertyPlaybackProgress: @(elapsedInSeconds/totalInSeconds),
-        MPNowPlayingInfoPropertyMediaType: @(MPNowPlayingInfoMediaTypeAudio),
         MPNowPlayingInfoPropertyPlaybackRate: @(rate),
     }];
+
+    if (&MPNowPlayingInfoPropertyPlaybackProgress != NULL)
+        songInfo[MPNowPlayingInfoPropertyPlaybackProgress] = @(playbackProgress);
+    if (&MPNowPlayingInfoPropertyMediaType != NULL)
+        songInfo[MPNowPlayingInfoPropertyMediaType] = @(MPNowPlayingInfoMediaTypeAudio);
 
     if (_shuffleMode == MPMusicShuffleModeOff) {
         songInfo[MPNowPlayingInfoPropertyPlaybackQueueIndex] = @(self.indexOfNowPlayingItem);
