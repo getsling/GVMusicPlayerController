@@ -36,7 +36,6 @@
 
 - (void)addDelegate:(id<GVMusicPlayerControllerDelegate>)delegate;
 - (void)removeDelegate:(id<GVMusicPlayerControllerDelegate>)delegate;
-- (void)remoteControlReceivedWithEvent:(UIEvent *)receivedEvent;
 - (void)setQueueWithItemCollection:(MPMediaItemCollection *)itemCollection;
 - (void)setQueueWithQuery:(MPMediaQuery *)query;
 

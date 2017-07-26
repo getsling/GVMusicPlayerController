@@ -113,6 +113,9 @@ void audioRouteChangeListenerCallback (void *inUserData, AudioSessionPropertyID 
                                                  selector:@selector(handle_VolumeChanged:)
                                                      name:MPMusicPlayerControllerVolumeDidChangeNotification
                                                    object:[MPMusicPlayerController iPodMusicPlayer]];
+
+        // Register for Control Center events
+        [self registerCommandCenterEvents];
     }
 
     return self;
@@ -439,59 +442,43 @@ void audioRouteChangeListenerCallback (void *inUserData, AudioSessionPropertyID 
     self.interrupted = NO;
 }
 
-#pragma mark - Other public methods
+#pragma mark - Music Player Remote Command Center
 
-- (void)remoteControlReceivedWithEvent:(UIEvent *)receivedEvent {
-    if (receivedEvent.type != UIEventTypeRemoteControl) {
-        return;
-    }
+- (void)registerCommandCenterEvents
+{
+    MPRemoteCommandCenter *commandCenter = [MPRemoteCommandCenter sharedCommandCenter];
 
-    switch (receivedEvent.subtype) {
-        case UIEventSubtypeRemoteControlTogglePlayPause: {
-            if (self.playbackState == MPMusicPlaybackStatePlaying) {
-                [self pause];
-            } else {
-                [self play];
-            }
-            break;
-        }
+    [commandCenter.playCommand addTargetWithHandler:
+      ^MPRemoteCommandHandlerStatus(MPRemoteCommandEvent *event) {
+        [self play]; return MPRemoteCommandHandlerStatusSuccess;
+    }];
 
-        case UIEventSubtypeRemoteControlNextTrack:
-            [self skipToNextItem];
-            break;
+    [commandCenter.pauseCommand addTargetWithHandler:
+      ^MPRemoteCommandHandlerStatus(MPRemoteCommandEvent *event) {
+        [self pause]; return MPRemoteCommandHandlerStatusSuccess;
+    }];
 
-        case UIEventSubtypeRemoteControlPreviousTrack:
-            [self skipToPreviousItem];
-            break;
+    [commandCenter.stopCommand addTargetWithHandler:
+      ^MPRemoteCommandHandlerStatus(MPRemoteCommandEvent *event) {
+        [self stop]; return MPRemoteCommandHandlerStatusSuccess;
+    }];
 
-        case UIEventSubtypeRemoteControlPlay:
-            [self play];
-            break;
+    [commandCenter.togglePlayPauseCommand addTargetWithHandler:
+      ^MPRemoteCommandHandlerStatus(MPRemoteCommandEvent *event) {
+        if (self.playbackState == MPMusicPlaybackStatePlaying)
+            [self pause]; else [self play];
+        return MPRemoteCommandHandlerStatusSuccess;
+    }];
 
-        case UIEventSubtypeRemoteControlPause:
-            [self pause];
-            break;
+    [commandCenter.nextTrackCommand addTargetWithHandler:
+      ^MPRemoteCommandHandlerStatus(MPRemoteCommandEvent *event) {
+        [self skipToNextItem]; return MPRemoteCommandHandlerStatusSuccess;
+    }];
 
-        case UIEventSubtypeRemoteControlStop:
-            [self stop];
-            break;
-
-        case UIEventSubtypeRemoteControlBeginSeekingBackward:
-            [self beginSeekingBackward];
-            break;
-
-        case UIEventSubtypeRemoteControlBeginSeekingForward:
-            [self beginSeekingForward];
-            break;
-
-        case UIEventSubtypeRemoteControlEndSeekingBackward:
-        case UIEventSubtypeRemoteControlEndSeekingForward:
-            [self endSeeking];
-            break;
-
-        default:
-            break;
-    }
+    [commandCenter.previousTrackCommand addTargetWithHandler:
+      ^MPRemoteCommandHandlerStatus(MPRemoteCommandEvent *event) {
+        [self skipToPreviousItem]; return MPRemoteCommandHandlerStatusSuccess;
+    }];
 }
 
 @end
