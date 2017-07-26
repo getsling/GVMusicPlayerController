@@ -79,10 +79,6 @@
     return YES;
 }
 
-- (void)remoteControlReceivedWithEvent:(UIEvent *)receivedEvent {
-    [[GVMusicPlayerController sharedInstance] remoteControlReceivedWithEvent:receivedEvent];
-}
-
 #pragma mark - IBActions
 
 - (IBAction)playButtonPressed {
